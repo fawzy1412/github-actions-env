@@ -14,6 +14,7 @@ jobs:
       MONGODB_CLUSTER_ADDRESS: cluster0.egook.mongodb.net
       MONGODB_USERNAME: adelfawzy464
       MONGODB_PASSWORD: ZZzwxZXBFFiQokCm
+      PORT: 8080
     steps:
       - name: Get Code
         uses: actions/checkout@v3
@@ -25,14 +26,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run server
-        env:
-            PORT: 8080
         run: npm start & npx wait-on http://127.0.0.1:$PORT
       - name: Run tests
         run: npm test
       - name: Output information
+        env:
+          ENV: dev
         run: |
            echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
+           echo "MONGODB_DB_NAME: $MONGODB_USERNAME"
+           echo "MONGODB_DB_NAME: $MONGODB_PASSWORD"
+           echo "ENV: $ENV"
            echo "MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}"
   deploy:
     needs: test
