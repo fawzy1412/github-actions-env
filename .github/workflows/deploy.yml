@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       MONGODB_CLUSTER_ADDRESS: cluster0.egook.mongodb.net
-      MONGODB_USERNAME: adelfawzy464
-      MONGODB_PASSWORD: ZZzwxZXBFFiQokCm
+      MONGODB_USERNAME:  ${{ secrets.MONGODB_USERNAME }}
+      MONGODB_PASSWORD:  ${{ secrets.MONGODB_PASSWORD }}
       PORT: 8080
     steps:
       - name: Get Code
